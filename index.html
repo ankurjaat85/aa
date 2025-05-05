@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: #f9f9f9;
+        }
+        input, button {
+            margin: 10px;
+            padding: 10px;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>EMI Calculator</h2>
+    <label for="loanAmount">Loan Amount:</label>
+    <input type="number" id="loanAmount" placeholder="Enter loan amount">
+    
+    <label for="interestRate">Interest Rate (Annual %):</label>
+    <input type="number" id="interestRate" placeholder="Enter annual interest rate">
+    
+    <label for="loanTenure">Loan Tenure (Months):</label>
+    <input type="number" id="loanTenure" placeholder="Enter loan tenure in months">
+    
+    <button onclick="calculateEMI()">Calculate EMI</button>
+    <h3 id="result"></h3>
+</div>
+
+<script>
+    function calculateEMI() {
+        let P = document.getElementById("loanAmount").value;
+        let R = document.getElementById("interestRate").value / 12 / 100;
+        let N = document.getElementById("loanTenure").value;
+
+        if (P > 0 && R > 0 && N > 0) {
+            let EMI = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
+            document.getElementById("result").innerText = "Monthly EMI: ₹" + EMI.toFixed(2);
+        } else {
+            document.getElementById("result").innerText = "Please enter valid values!";
+        }
+    }
+</script>
+
+</body>
+</html>
